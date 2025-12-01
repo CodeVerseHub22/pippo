@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - {{ site_settings.site_title }}{% endblock %}
+{% block og_title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header project-detail-header py-5 mt-5">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'projects' %}">Progetti</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ project.title }}</li>
+            </ol>
+        </nav>
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-primary mb-3">{{ project.get_category_display }}</span>
+                <h1 class="display-5 fw-bold">{{ project.title }}</h1>
+                <p class="lead text-muted">{{ project.short_description }}</p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                {% if project.project_url %}
+                <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary btn-lg me-2">
+                    <i class="fas fa-external-link-alt me-2"></i>Demo
+                </a>
+                {% endif %}
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-lg">
+                    <i class="fab fa-github me-2"></i>GitHub
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Content -->
+<section class="project-detail py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Project Image -->
+                <div class="project-detail-image mb-4">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid rounded shadow">
+                    {% else %}
+                    <div class="project-placeholder-large rounded">
+                        <i class="fas fa-project-diagram fa-5x"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Project Description -->
+                <div class="project-detail-content">
+                    <h3 class="mb-4">Descrizione del Progetto</h3>
+                    <div class="project-description-text">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Project Info Card -->
+                <div class="project-info-card sticky-sidebar">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">
+                                <i class="fas fa-info-circle me-2 text-primary"></i>Informazioni
+                            </h5>
+                            
+                            <!-- Category -->
+                            <div class="info-item mb-3">
+                                <small class="text-muted d-block">Categoria</small>
+                                <span class="fw-bold">{{ project.get_category_display }}</span>
+                            </div>
+                            
+                            <!-- Date -->
+                            <div class="info-item mb-3">
+                                <small class="text-muted d-block">Data</small>
+                                <span class="fw-bold">{{ project.created_at|date:"F Y" }}</span>
+                            </div>
+                            
+                            <!-- Technologies -->
+                            <div class="info-item mb-3">
+                                <small class="text-muted d-block mb-2">Tecnologie</small>
+                                <div class="technologies-list">
+                                    {% for tech in project.get_technologies_list %}
+                                    <span class="badge bg-light text-dark me-1 mb-1">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- Links -->
+                            <div class="info-item">
+                                <small class="text-muted d-block mb-2">Link</small>
+                                <div class="d-grid gap-2">
+                                    {% if project.project_url %}
+                                    <a href="{{ project.project_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-globe me-2"></i>Visita il sito
+                                    </a>
+                                    {% endif %}
+                                    {% if project.github_url %}
+                                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-sm">
+                                        <i class="fab fa-github me-2"></i>Codice sorgente
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Projects -->
+{% if related_projects %}
+<section class="related-projects py-5 bg-light">
+    <div class="container">
+        <h3 class="mb-4">Progetti Correlati</h3>
+        <div class="row g-4">
+            {% for related in related_projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card h-100">
+                    <div class="project-image">
+                        {% if related.image %}
+                        <img src="{{ related.image.url }}" alt="{{ related.title }}" class="img-fluid">
+                        {% else %}
+                        <div class="project-placeholder">
+                            <i class="fas fa-project-diagram fa-3x"></i>
+                        </div>
+                        {% endif %}
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="{% url 'project_detail' related.slug %}" class="btn btn-light btn-sm" aria-label="Visualizza {{ related.title }}">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h5 class="project-title">
+                            <a href="{% url 'project_detail' related.slug %}">{{ related.title }}</a>
+                        </h5>
+                        <p class="project-description text-muted">{{ related.short_description|truncatewords:15 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Back to Projects -->
+<section class="py-4">
+    <div class="container text-center">
+        <a href="{% url 'projects' %}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left me-2"></i>Torna ai Progetti
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,480 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ site_settings.author_name|default:"Developer" }} - Full Stack Developer{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <!-- Badge -->
+            <div class="hero-badge">
+                <i class="fas fa-rocket me-2"></i>Benvenuto nel mio Portfolio
+            </div>
+            
+            <!-- Title -->
+            <h1 class="hero-title">
+                Ciao, sono<br>
+                <span class="name">{{ site_settings.author_name|default:"Developer" }}</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="hero-subtitle">
+                Sono un <span class="typing-text" data-words='["Full Stack Developer", "Frontend Expert", "Backend Engineer", "Problem Solver"]'>Full Stack Developer</span>
+            </p>
+            
+            <!-- Description -->
+            <p class="hero-description">
+                {{ site_settings.site_description|default:"Sviluppatore appassionato con esperienza nella creazione di applicazioni web moderne, performanti e scalabili. Trasformo idee in esperienze digitali straordinarie." }}
+            </p>
+            
+            <!-- Buttons -->
+            <div class="hero-buttons">
+                <a href="{% url 'projects' %}" class="btn btn-primary">
+                    <i class="fas fa-folder-open me-2"></i>Vedi Progetti
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-paper-plane me-2"></i>Contattami
+                </a>
+            </div>
+            
+            <!-- Avatar -->
+            <div class="hero-image mt-5">
+                <div class="avatar-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section-dark py-5">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Chi Sono</span>
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">
+                Trasformo idee in esperienze digitali straordinarie
+            </p>
+        </div>
+        
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <div class="about-image-wrapper text-center">
+                    <div class="avatar-placeholder mx-auto avatar-large">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="about-content">
+                    <h3 class="glow-text mb-4">Trasforma idee in esperienze digitali</h3>
+                    <p class="lead text-secondary">
+                        Sono uno sviluppatore Full Stack con una passione per la creazione di applicazioni web moderne e intuitive.
+                    </p>
+                    <p class="text-muted">
+                        Con anni di esperienza nel settore, ho sviluppato competenze in diverse tecnologie e framework, permettendomi di affrontare progetti complessi con creatività e professionalità.
+                    </p>
+                    
+                    <!-- Stats -->
+                    <div class="stats-grid mt-4">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="5">0</div>
+                            <div class="stat-label">Anni Esperienza</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">0</div>
+                            <div class="stat-label">Progetti</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="25">0</div>
+                            <div class="stat-label">Clienti</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills-section py-5">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Competenze</span>
+            <h2 class="section-title">Skills Laboratory</h2>
+            <p class="section-subtitle">
+                Le tecnologie e strumenti che utilizzo per creare progetti straordinari
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Frontend -->
+            <div class="col-lg-4 col-md-6">
+                <div class="skill-category">
+                    <h4 class="skill-category-title">
+                        <i class="fas fa-laptop-code me-2"></i>Frontend
+                    </h4>
+                    {% for skill in skills %}
+                    {% if skill.category == 'frontend' %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">
+                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                {{ skill.name }}
+                            </span>
+                            <span class="skill-percentage">{{ skill.level }}%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="{{ skill.name }}" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="{{ skill.level }}"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% empty %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-angular" aria-hidden="true"></i> Angular</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Angular" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-react" aria-hidden="true"></i> React</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="React" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-js" aria-hidden="true"></i> TypeScript</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="TypeScript" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="88"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Backend -->
+            <div class="col-lg-4 col-md-6">
+                <div class="skill-category">
+                    <h4 class="skill-category-title">
+                        <i class="fas fa-server me-2"></i>Backend
+                    </h4>
+                    {% for skill in skills %}
+                    {% if skill.category == 'backend' %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">
+                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                {{ skill.name }}
+                            </span>
+                            <span class="skill-percentage">{{ skill.level }}%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="{{ skill.name }}" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="{{ skill.level }}"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% empty %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-python" aria-hidden="true"></i> Python/Django</span>
+                            <span class="skill-percentage">92%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Python Django" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="92"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-node-js" aria-hidden="true"></i> Node.js</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Node.js" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fas fa-database" aria-hidden="true"></i> PostgreSQL</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="PostgreSQL" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="80"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Tools -->
+            <div class="col-lg-4 col-md-6">
+                <div class="skill-category">
+                    <h4 class="skill-category-title">
+                        <i class="fas fa-tools me-2"></i>Tools & DevOps
+                    </h4>
+                    {% for skill in skills %}
+                    {% if skill.category == 'devops' %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">
+                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                {{ skill.name }}
+                            </span>
+                            <span class="skill-percentage">{{ skill.level }}%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="{{ skill.name }}" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="{{ skill.level }}"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% empty %}
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-git-alt" aria-hidden="true"></i> Git</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Git" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-docker" aria-hidden="true"></i> Docker</span>
+                            <span class="skill-percentage">78%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Docker" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-aws" aria-hidden="true"></i> AWS</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="AWS" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" data-width="75"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Portfolio</span>
+            <h2 class="section-title">I Miei Progetti</h2>
+            <p class="section-subtitle">
+                Una selezione dei miei lavori più recenti e significativi
+            </p>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <a href="{% url 'projects' %}" class="filter-btn active">Tutti</a>
+            <a href="{% url 'projects' %}?category=web" class="filter-btn">Web</a>
+            <a href="{% url 'projects' %}?category=mobile" class="filter-btn">Mobile</a>
+            <a href="{% url 'projects' %}?category=fullstack" class="filter-btn">Full Stack</a>
+        </div>
+        
+        <div class="row g-4">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card card h-100">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% else %}
+                    <div class="img-placeholder">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <span class="project-category-badge">{{ project.get_category_display }}</span>
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.short_description }}</p>
+                        <div class="project-tech">
+                            {% for tech in project.technologies.split %}
+                            <span class="tech-tag">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-3">
+                            <a href="{% url 'project_detail' project.slug %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-eye me-1" aria-hidden="true"></i> Dettagli
+                            </a>
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" class="btn btn-ghost btn-sm ms-2" rel="noopener noreferrer" aria-label="Vedi {{ project.title }} su GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Demo Projects -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card card h-100">
+                    <div class="img-placeholder">
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="project-category-badge">Full Stack</span>
+                        <h5 class="card-title">E-Commerce Platform</h5>
+                        <p class="card-text">Piattaforma e-commerce completa con gestione prodotti, carrello e pagamenti.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card card h-100">
+                    <div class="img-placeholder">
+                        <i class="fas fa-tasks" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="project-category-badge">Web</span>
+                        <h5 class="card-title">Task Management App</h5>
+                        <p class="card-text">Applicazione per la gestione di task e progetti con drag & drop.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card card h-100">
+                    <div class="img-placeholder">
+                        <i class="fas fa-cloud" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="project-category-badge">Backend</span>
+                        <h5 class="card-title">API Gateway</h5>
+                        <p class="card-text">Sistema di gestione API con autenticazione e rate limiting.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'projects' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-th-large me-2" aria-hidden="true"></i>Vedi Tutti i Progetti
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Testimonianze</span>
+            <h2 class="section-title">Cosa Dicono di Me</h2>
+            <p class="section-subtitle">
+                Feedback da clienti e collaboratori
+            </p>
+        </div>
+        
+        <div class="testimonials-carousel">
+            <div class="carousel-track">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                        <p>"Eccellente sviluppatore, ha trasformato la nostra idea in una soluzione web perfettamente funzionante. Comunicazione chiara e consegna puntuale."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="author-info">
+                            <h5>Marco Rossi</h5>
+                            <span>CEO, TechStart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                        <p>"Professionista serio e competente. Ha risolto problemi complessi con soluzioni eleganti. Consigliato per progetti enterprise."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="author-info">
+                            <h5>Laura Bianchi</h5>
+                            <span>CTO, InnovaLab</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                        <p>"Collaborazione fantastica! Grande attenzione ai dettagli e capacità di anticipare le esigenze del progetto."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="author-info">
+                            <h5>Giuseppe Verdi</h5>
+                            <span>Project Manager, DigitalWave</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Testimonianza precedente">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <div class="carousel-dots"></div>
+                <button class="carousel-next" aria-label="Testimonianza successiva">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5">
+    <div class="container">
+        <div class="cta-card">
+            <div class="cta-content text-center">
+                <h2>Pronto a Iniziare un Progetto?</h2>
+                <p class="text-muted mb-4">
+                    Trasformiamo insieme la tua idea in realtà. Contattami per discutere del tuo prossimo progetto.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket me-2" aria-hidden="true"></i>Iniziamo!
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

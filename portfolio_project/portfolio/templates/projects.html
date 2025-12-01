@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Progetti - {{ site_settings.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Projects Hero -->
+<section class="page-hero">
+    <div class="hero-bg-effects">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="hero-badge animate-fade-in">
+                    <i class="fas fa-code"></i>
+                    <span>Portfolio</span>
+                </div>
+                <h1 class="hero-title animate-fade-in">
+                    I Miei <span class="text-gradient">Progetti</span>
+                </h1>
+                <p class="hero-subtitle animate-fade-in">
+                    Esplora una selezione curata dei miei lavori più significativi, 
+                    dalle web app alle soluzioni enterprise.
+                </p>
+                
+                <!-- Filter Pills -->
+                <div class="filter-pills animate-fade-in">
+                    <a href="{% url 'projects' %}?category=all" 
+                       class="filter-pill {% if current_category == 'all' %}active{% endif %}">
+                        <i class="fas fa-th-large"></i>
+                        <span>Tutti</span>
+                    </a>
+                    {% for cat_value, cat_label in categories %}
+                    <a href="{% url 'projects' %}?category={{ cat_value }}" 
+                       class="filter-pill {% if current_category == cat_value %}active{% endif %}">
+                        {% if cat_value == 'web' %}
+                        <i class="fas fa-globe"></i>
+                        {% elif cat_value == 'mobile' %}
+                        <i class="fas fa-mobile-alt"></i>
+                        {% elif cat_value == 'desktop' %}
+                        <i class="fas fa-desktop"></i>
+                        {% elif cat_value == 'api' %}
+                        <i class="fas fa-plug"></i>
+                        {% else %}
+                        <i class="fas fa-layer-group"></i>
+                        {% endif %}
+                        <span>{{ cat_label }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="projects-showcase">
+    <div class="container">
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card-wrapper animate-on-scroll">
+                <article class="project-card-modern">
+                    <!-- Project Image -->
+                    <div class="project-visual">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
+                        {% else %}
+                        <div class="project-placeholder-img">
+                            <div class="placeholder-icon">
+                                {% if project.category == 'web' %}
+                                <i class="fas fa-globe"></i>
+                                {% elif project.category == 'mobile' %}
+                                <i class="fas fa-mobile-alt"></i>
+                                {% elif project.category == 'desktop' %}
+                                <i class="fas fa-desktop"></i>
+                                {% else %}
+                                <i class="fas fa-code"></i>
+                                {% endif %}
+                            </div>
+                            <div class="placeholder-pattern"></div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Overlay Actions -->
+                        <div class="project-overlay">
+                            <div class="overlay-actions">
+                                <a href="{% url 'project_detail' project.slug %}" class="action-btn primary-btn" title="Vedi Dettagli">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" class="action-btn" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                {% endif %}
+                                {% if project.project_url %}
+                                <a href="{{ project.project_url }}" target="_blank" class="action-btn" title="Demo Live">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Category Badge -->
+                        <div class="project-category-badge">
+                            <span>{{ project.get_category_display }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Info -->
+                    <div class="project-info">
+                        <h3 class="project-title">
+                            <a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a>
+                        </h3>
+                        <p class="project-excerpt">{{ project.short_description }}</p>
+                        
+                        <!-- Tech Stack -->
+                        <div class="project-tech-stack">
+                            {% for tech in project.get_technologies_list %}
+                            <span class="tech-chip">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Project Footer -->
+                        <div class="project-footer">
+                            <div class="project-date">
+                                <i class="far fa-calendar"></i>
+                                <span>{{ project.created_at|date:"M Y" }}</span>
+                            </div>
+                            <a href="{% url 'project_detail' project.slug %}" class="view-project-link">
+                                Scopri di più <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% empty %}
+            <!-- Empty State -->
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3>Nessun Progetto Trovato</h3>
+                <p>
+                    {% if current_category != 'all' %}
+                    Non ci sono progetti in questa categoria.
+                    <a href="{% url 'projects' %}" class="glow-link">Vedi tutti i progetti</a>
+                    {% else %}
+                    I progetti verranno visualizzati qui una volta aggiunti dall'admin.
+                    {% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if projects.has_other_pages %}
+        <nav class="pagination-modern" aria-label="Navigazione progetti">
+            <div class="pagination-wrapper">
+                {% if projects.has_previous %}
+                <a href="?page={{ projects.previous_page_number }}{% if current_category != 'all' %}&category={{ current_category }}{% endif %}" 
+                   class="page-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Precedente</span>
+                </a>
+                {% endif %}
+                
+                <div class="page-numbers">
+                    {% for num in projects.paginator.page_range %}
+                    <a href="?page={{ num }}{% if current_category != 'all' %}&category={{ current_category }}{% endif %}" 
+                       class="page-num {% if projects.number == num %}active{% endif %}">
+                        {{ num }}
+                    </a>
+                    {% endfor %}
+                </div>
+                
+                {% if projects.has_next %}
+                <a href="?page={{ projects.next_page_number }}{% if current_category != 'all' %}&category={{ current_category }}{% endif %}" 
+                   class="page-btn next-btn">
+                    <span>Successiva</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <div class="cta-content">
+                <div class="cta-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2>Hai un'idea per un progetto?</h2>
+                <p>Trasformiamo insieme la tua visione in realtà. Contattami per discutere del tuo prossimo progetto.</p>
+                <a href="{% url 'contact' %}" class="btn-glow">
+                    <span>Iniziamo a Collaborare</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="cta-decoration">
+                <div class="orbit-ring"></div>
+                <div class="orbit-ring"></div>
+                <div class="orbit-ring"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

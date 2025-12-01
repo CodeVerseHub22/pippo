@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ site_settings.site_description|default:'Portfolio professionale' }}">
+    <meta name="author" content="{{ site_settings.author_name|default:'Developer' }}">
+    <meta name="theme-color" content="#0a0a0f">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{% block og_title %}{{ site_settings.site_title|default:'Portfolio' }}{% endblock %}">
+    <meta property="og:description" content="{{ site_settings.site_description|default:'Portfolio professionale' }}">
+    <meta property="og:type" content="website">
+    
+    <title>{% block title %}{{ site_settings.site_title|default:'Portfolio' }}{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    
+    <!-- Dynamic Color Palette -->
+    {% if active_palette %}
+    <style>
+        :root {
+            --primary-color: {{ active_palette.primary_color }};
+            --primary-glow: {{ active_palette.primary_color }}66;
+            --secondary-color: {{ active_palette.secondary_color }};
+            --accent-color: {{ active_palette.accent_color }};
+            --gradient-primary: linear-gradient(135deg, {{ active_palette.primary_color }} 0%, {{ active_palette.secondary_color }} 100%);
+            --glow-primary: 0 0 20px {{ active_palette.primary_color }}66, 0 0 40px {{ active_palette.primary_color }}33;
+            --glow-text: 0 0 10px {{ active_palette.primary_color }}80;
+        }
+    </style>
+    {% endif %}
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-terminal me-2"></i>
+                <span>{{ site_settings.author_name|default:"Portfolio" }}</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}" href="{% url 'projects' %}">
+                            Progetti
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">
+                            Contatti
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="container messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand mb-3">
+                        <i class="fas fa-terminal me-2"></i>{{ site_settings.author_name|default:"Portfolio" }}
+                    </div>
+                    <p class="footer-text">
+                        {{ site_settings.site_description|default:"Sviluppatore appassionato con esperienza nella creazione di applicazioni web moderne e performanti." }}
+                    </p>
+                    <div class="social-links mt-4">
+                        {% if site_settings.github_url %}
+                        <a href="{{ site_settings.github_url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        {% else %}
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if site_settings.linkedin_url %}
+                        <a href="{{ site_settings.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        {% else %}
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:{{ site_settings.email|default:'info@example.com' }}" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Link Rapidi</h5>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'projects' %}">Progetti</a></li>
+                        <li><a href="{% url 'contact' %}">Contatti</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Servizi</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Frontend Development</a></li>
+                        <li><a href="#">Backend Development</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Contatti</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope me-2 footer-icon"></i> {{ site_settings.email|default:"info@example.com" }}</li>
+                        <li><i class="fas fa-phone me-2 footer-icon"></i> {{ site_settings.phone|default:"+39 123 456 7890" }}</li>
+                        <li><i class="fas fa-map-marker-alt me-2 footer-icon"></i> {{ site_settings.location|default:"Italia" }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ site_settings.author_name|default:"Portfolio" }}. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Torna su">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

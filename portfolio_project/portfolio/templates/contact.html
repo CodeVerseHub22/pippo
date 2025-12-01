@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contatti - {{ site_settings.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Contact Hero -->
+<section class="contact-hero">
+    <div class="hero-bg-effects">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="hero-badge animate-fade-in">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Get in Touch</span>
+                </div>
+                <h1 class="hero-title animate-fade-in">
+                    Iniziamo a <span class="text-gradient">Collaborare</span>
+                </h1>
+                <p class="hero-subtitle animate-fade-in">
+                    Hai un progetto in mente o vuoi semplicemente fare due chiacchiere? 
+                    Sono sempre aperto a nuove opportunità!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="contact-form-card animate-on-scroll">
+                    <div class="form-header">
+                        <div class="form-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h2>Inviami un Messaggio</h2>
+                        <p>Compila il form e ti risponderò il prima possibile</p>
+                    </div>
+                    
+                    <form method="post" action="{% url 'contact' %}" id="contactForm" class="modern-form">
+                        {% csrf_token %}
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" name="name" id="id_name" 
+                                           class="form-input {% if form.name.errors %}error{% endif %}" 
+                                           placeholder=" "
+                                           value="{{ form.name.value|default:'' }}"
+                                           required>
+                                    <label for="id_name" class="input-label">Nome *</label>
+                                    <div class="input-highlight"></div>
+                                </div>
+                                {% if form.name.errors %}
+                                <span class="error-message">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    {{ form.name.errors.0 }}
+                                </span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" name="email" id="id_email" 
+                                           class="form-input {% if form.email.errors %}error{% endif %}" 
+                                           placeholder=" "
+                                           value="{{ form.email.value|default:'' }}"
+                                           required>
+                                    <label for="id_email" class="input-label">Email *</label>
+                                    <div class="input-highlight"></div>
+                                </div>
+                                {% if form.email.errors %}
+                                <span class="error-message">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    {{ form.email.errors.0 }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <div class="input-wrapper">
+                                <i class="fas fa-tag input-icon"></i>
+                                <input type="text" name="subject" id="id_subject" 
+                                       class="form-input {% if form.subject.errors %}error{% endif %}" 
+                                       placeholder=" "
+                                       value="{{ form.subject.value|default:'' }}"
+                                       required>
+                                <label for="id_subject" class="input-label">Oggetto *</label>
+                                <div class="input-highlight"></div>
+                            </div>
+                            {% if form.subject.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ form.subject.errors.0 }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <div class="input-wrapper textarea-wrapper">
+                                <i class="fas fa-comment-alt input-icon"></i>
+                                <textarea name="message" id="id_message" 
+                                          class="form-input form-textarea {% if form.message.errors %}error{% endif %}" 
+                                          placeholder=" "
+                                          rows="5"
+                                          required>{{ form.message.value|default:'' }}</textarea>
+                                <label for="id_message" class="input-label">Messaggio *</label>
+                                <div class="input-highlight"></div>
+                            </div>
+                            {% if form.message.errors %}
+                            <span class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ form.message.errors.0 }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Invia Messaggio</span>
+                            <span class="btn-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </span>
+                            <div class="btn-glow-effect"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="col-lg-5">
+                <div class="contact-info-panel animate-on-scroll">
+                    <div class="info-header">
+                        <h3>Informazioni di Contatto</h3>
+                        <p>Preferisci contattarmi direttamente? Ecco come puoi trovarmi:</p>
+                    </div>
+                    
+                    <div class="contact-cards">
+                        {% if site_settings.email %}
+                        <a href="mailto:{{ site_settings.email }}" class="contact-info-card">
+                            <div class="card-icon email-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-label">Email</span>
+                                <span class="card-value">{{ site_settings.email }}</span>
+                            </div>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if site_settings.phone %}
+                        <a href="tel:{{ site_settings.phone }}" class="contact-info-card">
+                            <div class="card-icon phone-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-label">Telefono</span>
+                                <span class="card-value">{{ site_settings.phone }}</span>
+                            </div>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if site_settings.location %}
+                        <div class="contact-info-card">
+                            <div class="card-icon location-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-label">Località</span>
+                                <span class="card-value">{{ site_settings.location }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-section">
+                        <h4>Seguimi sui Social</h4>
+                        <div class="social-grid">
+                            {% if site_settings.social_links.github %}
+                            <a href="{{ site_settings.social_links.github }}" target="_blank" class="social-card github">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.social_links.linkedin %}
+                            <a href="{{ site_settings.social_links.linkedin }}" target="_blank" class="social-card linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.social_links.twitter %}
+                            <a href="{{ site_settings.social_links.twitter }}" target="_blank" class="social-card twitter">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.social_links.instagram %}
+                            <a href="{{ site_settings.social_links.instagram }}" target="_blank" class="social-card instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Availability Status -->
+                    <div class="availability-card">
+                        <div class="availability-indicator">
+                            <span class="pulse-dot green"></span>
+                            <span>Attualmente Disponibile</span>
+                        </div>
+                        <p>Sono disponibile per nuovi progetti freelance e collaborazioni. Tempo di risposta medio: 24h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <div class="section-badge">
+                <i class="fas fa-question-circle"></i>
+                <span>FAQ</span>
+            </div>
+            <h2 class="section-title">Domande <span class="text-gradient">Frequenti</span></h2>
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-card animate-on-scroll">
+                <div class="faq-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4>Quanto tempo richiede un progetto?</h4>
+                <p>Dipende dalla complessità. Un sito web semplice può richiedere 1-2 settimane, mentre progetti più complessi possono richiedere 1-3 mesi.</p>
+            </div>
+            <div class="faq-card animate-on-scroll">
+                <div class="faq-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h4>Come funziona il preventivo?</h4>
+                <p>Dopo una prima chiamata conoscitiva, preparo un preventivo dettagliato basato sulle tue esigenze specifiche. Nessun costo nascosto.</p>
+            </div>
+            <div class="faq-card animate-on-scroll">
+                <div class="faq-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h4>Offri supporto post-lancio?</h4>
+                <p>Assolutamente! Offro pacchetti di manutenzione e supporto continuo per garantire che il tuo progetto funzioni sempre al meglio.</p>
+            </div>
+            <div class="faq-card animate-on-scroll">
+                <div class="faq-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h4>Lavori anche da remoto?</h4>
+                <p>Sì, la maggior parte dei miei progetti sono gestiti da remoto. Utilizzo strumenti moderni per comunicazione e collaborazione efficaci.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

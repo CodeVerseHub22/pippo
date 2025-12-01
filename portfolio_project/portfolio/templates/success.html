@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Messaggio Inviato - {{ site_settings.site_title }}{% endblock %}
+
+{% block content %}
+<section class="success-section py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="success-icon mb-4">
+                    <i class="fas fa-check-circle fa-5x text-success"></i>
+                </div>
+                <h1 class="display-5 fw-bold mb-3">Messaggio Inviato!</h1>
+                <p class="lead text-muted mb-4">
+                    Grazie per avermi contattato. Ho ricevuto il tuo messaggio e ti risponderò il prima possibile.
+                </p>
+                <div class="success-actions">
+                    <a href="{% url 'home' %}" class="btn btn-primary btn-lg me-2">
+                        <i class="fas fa-home me-2"></i>Torna alla Home
+                    </a>
+                    <a href="{% url 'projects' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-folder-open me-2"></i>Vedi Progetti
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .success-section {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+    }
+    
+    .success-icon {
+        animation: bounce 1s ease infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
+{% endblock %}

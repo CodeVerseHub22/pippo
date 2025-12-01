@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pagina non trovata - {{ site_settings.site_title }}{% endblock %}
+
+{% block content %}
+<section class="error-section py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="error-code mb-4">
+                    <span class="display-1 fw-bold text-primary">404</span>
+                </div>
+                <h1 class="h2 mb-3">Pagina non trovata</h1>
+                <p class="lead text-muted mb-4">
+                    La pagina che stai cercando non esiste o è stata spostata.
+                </p>
+                <div class="error-actions">
+                    <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home me-2"></i>Torna alla Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-section {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endblock %}
