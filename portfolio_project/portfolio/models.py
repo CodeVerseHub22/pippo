@@ -172,6 +172,11 @@ class Skill(models.Model):
     
     def __str__(self):
         return f"{self.name} ({self.get_category_display()})"
+    
+    @property
+    def level(self):
+        """Converte proficiency (1-5) in percentuale (20-100)"""
+        return self.proficiency * 20
 
 
 class Experience(models.Model):

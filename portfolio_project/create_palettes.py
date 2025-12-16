@@ -1,8 +1,8 @@
 import os
 import sys
 
-# Aggiungi il path del progetto
-sys.path.insert(0, r'c:\Users\Postazione16Aula1\Desktop\Portfolio\portfolio_project')
+# Aggiungi il path del progetto  
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_project.settings')
 
 import django
@@ -10,51 +10,51 @@ django.setup()
 
 from portfolio.models import ColorPalette, SiteSettings
 
-# Crea palette predefinite
+# Palette moderne e professionali - 2025
 palettes = [
     {
-        'name': 'Modern Blue',
-        'primary_color': '#3498db',
-        'secondary_color': '#2980b9',
-        'accent_color': '#e74c3c',
-        'background_color': '#f8f9fa',
-        'text_color': '#2c3e50',
+        'name': 'Minimal Dark',
+        'primary_color': '#0f172a',      # Slate dark
+        'secondary_color': '#1e293b',    # Slate medium
+        'accent_color': '#06b6d4',       # Cyan bright
+        'background_color': '#ffffff',
+        'text_color': '#0f172a',
         'is_active': True
     },
     {
-        'name': 'Forest Green',
-        'primary_color': '#27ae60',
-        'secondary_color': '#1e8449',
-        'accent_color': '#f39c12',
-        'background_color': '#f5f5f5',
-        'text_color': '#2d3436',
+        'name': 'Professional Blue',
+        'primary_color': '#1e40af',      # Blue professional
+        'secondary_color': '#3b82f6',    # Blue bright
+        'accent_color': '#f59e0b',       # Amber accent
+        'background_color': '#f8fafc',   # Slate lightest
+        'text_color': '#1e293b',
         'is_active': False
     },
     {
-        'name': 'Royal Purple',
-        'primary_color': '#9b59b6',
-        'secondary_color': '#8e44ad',
-        'accent_color': '#e67e22',
-        'background_color': '#fafafa',
-        'text_color': '#34495e',
+        'name': 'Elegant Gray',
+        'primary_color': '#374151',      # Gray dark
+        'secondary_color': '#6b7280',    # Gray medium
+        'accent_color': '#8b5cf6',       # Violet accent
+        'background_color': '#f9fafb',
+        'text_color': '#111827',
         'is_active': False
     },
     {
-        'name': 'Sunset Orange',
-        'primary_color': '#e74c3c',
-        'secondary_color': '#c0392b',
-        'accent_color': '#3498db',
-        'background_color': '#fff5f5',
-        'text_color': '#2c3e50',
+        'name': 'Nordic Light',
+        'primary_color': '#0891b2',      # Cyan dark
+        'secondary_color': '#06b6d4',    # Cyan bright
+        'accent_color': '#ec4899',       # Pink accent
+        'background_color': '#fefefe',
+        'text_color': '#0f172a',
         'is_active': False
     },
     {
-        'name': 'Ocean Teal',
-        'primary_color': '#1abc9c',
-        'secondary_color': '#16a085',
-        'accent_color': '#e74c3c',
-        'background_color': '#f0ffff',
-        'text_color': '#2c3e50',
+        'name': 'Sophisticated Navy',
+        'primary_color': '#1e3a8a',      # Blue dark navy
+        'secondary_color': '#2563eb',    # Blue medium
+        'accent_color': '#14b8a6',       # Teal accent
+        'background_color': '#f8fafc',
+        'text_color': '#0f172a',
         'is_active': False
     },
 ]

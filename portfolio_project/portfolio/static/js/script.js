@@ -267,18 +267,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // SKILL BARS ANIMATION
     // ============================================
-    const skillBars = document.querySelectorAll('.skill-progress');
+    const skillBars = document.querySelectorAll('.progress-bar');
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Get width from data-width attribute or fallback to style.width
-                const targetWidth = entry.target.dataset.width 
-                    ? entry.target.dataset.width + '%' 
-                    : entry.target.style.width;
-                entry.target.style.width = '0';
-                setTimeout(() => {
-                    entry.target.style.width = targetWidth;
-                }, 100);
+                // Get width from data-width attribute
+                const targetWidth = entry.target.dataset.width;
+                if (targetWidth) {
+                    entry.target.style.width = '0%';
+                    setTimeout(() => {
+                        entry.target.style.width = targetWidth + '%';
+                    }, 100);
+                }
+                skillObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
@@ -433,66 +434,9 @@ document.addEventListener('DOMContentLoaded', function() {
     lazyImages.forEach(img => imageObserver.observe(img));
     
     // ============================================
-    // TESTIMONIALS CAROUSEL
+    // TESTIMONIALS CAROUSEL - DISABLED (showing all cards in grid)
     // ============================================
-    const carousel = document.querySelector('.testimonials-carousel');
-    if (carousel) {
-        const track = carousel.querySelector('.carousel-track');
-        const slides = carousel.querySelectorAll('.testimonial-card');
-        const prevBtn = carousel.querySelector('.carousel-prev');
-        const nextBtn = carousel.querySelector('.carousel-next');
-        const dotsContainer = carousel.querySelector('.carousel-dots');
-        
-        if (slides.length > 0) {
-            let currentIndex = 0;
-            
-            // Create dots
-            slides.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.classList.add('carousel-dot');
-                if (index === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(index));
-                dotsContainer?.appendChild(dot);
-            });
-            
-            const dots = dotsContainer?.querySelectorAll('.carousel-dot');
-            
-            function goToSlide(index) {
-                if (index < 0) index = slides.length - 1;
-                if (index >= slides.length) index = 0;
-                
-                currentIndex = index;
-                track.style.transform = `translateX(-${index * 100}%)`;
-                
-                dots?.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-            }
-            
-            prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-            nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-            
-            // Auto-play
-            setInterval(() => goToSlide(currentIndex + 1), 5000);
-            
-            // Touch support
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            track.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-            
-            track.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                if (touchStartX - touchEndX > 50) {
-                    goToSlide(currentIndex + 1);
-                } else if (touchEndX - touchStartX > 50) {
-                    goToSlide(currentIndex - 1);
-                }
-            });
-        }
-    }
+    // Carousel functionality disabled to show all testimonials at once
     
     // ============================================
     // LOADING SCREEN
