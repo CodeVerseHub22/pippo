@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 
 
 # Database
+# Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 # Default to SQLite for local development
 DATABASES = {
@@ -97,8 +98,7 @@ if 'DATABASE_URL' in os.environ:
         os.environ.get('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
-    )   }
-}
+    )
 
 
 # Password validation
