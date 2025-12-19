@@ -10,9 +10,13 @@
         <div class="hero-content">
             <!-- Avatar -->
             <div class="hero-image mb-4">
+                {% if site_settings.author_image %}
+                <img src="{{ site_settings.author_image.url }}" alt="{{ site_settings.author_name }}" class="avatar-img">
+                {% else %}
                 <div class="avatar-placeholder">
                     <i class="fas fa-user"></i>
                 </div>
+                {% endif %}
             </div>
             
             <!-- Badge -->
@@ -63,9 +67,13 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
                 <div class="about-image-wrapper text-center">
+                    {% if site_settings.author_image %}
+                    <img src="{{ site_settings.author_image.url }}" alt="{{ site_settings.author_name }}" class="avatar-img avatar-large">
+                    {% else %}
                     <div class="avatar-placeholder mx-auto avatar-large">
                         <i class="fas fa-code"></i>
                     </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-7">
