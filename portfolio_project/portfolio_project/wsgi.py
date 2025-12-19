@@ -15,5 +15,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_project.settings')
 
 application = get_wsgi_application()
 
-# Run collectstatic on first deployment
 app = application
