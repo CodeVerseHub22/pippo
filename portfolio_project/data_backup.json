@@ -1,0 +1,187 @@
+[
+{
+  "model": "portfolio.colorpalette",
+  "pk": 6,
+  "fields": {
+    "name": "Minimal Dark",
+    "primary_color": "#0f172a",
+    "secondary_color": "#1e293b",
+    "accent_color": "#06b6d4",
+    "text_color": "#0f172a",
+    "background_color": "#ffffff",
+    "is_active": false,
+    "created_at": "2025-12-16T15:30:05.230Z"
+  }
+},
+{
+  "model": "portfolio.colorpalette",
+  "pk": 7,
+  "fields": {
+    "name": "Professional Blue",
+    "primary_color": "#1e40af",
+    "secondary_color": "#3b82f6",
+    "accent_color": "#f59e0b",
+    "text_color": "#1e293b",
+    "background_color": "#f8fafc",
+    "is_active": false,
+    "created_at": "2025-12-16T15:30:05.232Z"
+  }
+},
+{
+  "model": "portfolio.colorpalette",
+  "pk": 8,
+  "fields": {
+    "name": "Elegant Gray",
+    "primary_color": "#374151",
+    "secondary_color": "#6b7280",
+    "accent_color": "#8b5cf6",
+    "text_color": "#111827",
+    "background_color": "#f9fafb",
+    "is_active": false,
+    "created_at": "2025-12-16T15:30:05.234Z"
+  }
+},
+{
+  "model": "portfolio.colorpalette",
+  "pk": 9,
+  "fields": {
+    "name": "Nordic Light",
+    "primary_color": "#0891b2",
+    "secondary_color": "#06b6d4",
+    "accent_color": "#ec4899",
+    "text_color": "#0f172a",
+    "background_color": "#fefefe",
+    "is_active": false,
+    "created_at": "2025-12-16T15:30:05.236Z"
+  }
+},
+{
+  "model": "portfolio.colorpalette",
+  "pk": 10,
+  "fields": {
+    "name": "Sophisticated Navy",
+    "primary_color": "#1e3a8a",
+    "secondary_color": "#2563eb",
+    "accent_color": "#14b8a6",
+    "text_color": "#0f172a",
+    "background_color": "#f8fafc",
+    "is_active": true,
+    "created_at": "2025-12-16T15:30:05.238Z"
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 1,
+  "fields": {
+    "title": "Portfolio Project",
+    "slug": "portfolio-project",
+    "description": "Progetto completo di portfolio personale con gestione progetti, skills ed esperienze",
+    "short_description": "Un portfolio personale realizzato con Django",
+    "image": "",
+    "technologies": "Python, Django, HTML, CSS, JavaScript",
+    "project_url": null,
+    "github_url": null,
+    "category": "web",
+    "featured": true,
+    "order": 1,
+    "created_at": "2025-12-16T15:23:24.091Z",
+    "updated_at": "2025-12-16T15:23:24.091Z"
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Python Test",
+    "category": "backend",
+    "proficiency": 5,
+    "icon": "fab fa-python",
+    "order": 1
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 2,
+  "fields": {
+    "name": "Python",
+    "category": "backend",
+    "proficiency": 5,
+    "icon": "fab fa-python",
+    "order": 0
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 3,
+  "fields": {
+    "name": "Django",
+    "category": "backend",
+    "proficiency": 5,
+    "icon": "fas fa-server",
+    "order": 1
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 4,
+  "fields": {
+    "name": "JavaScript",
+    "category": "frontend",
+    "proficiency": 4,
+    "icon": "fab fa-js",
+    "order": 2
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 5,
+  "fields": {
+    "name": "React",
+    "category": "frontend",
+    "proficiency": 4,
+    "icon": "fab fa-react",
+    "order": 3
+  }
+},
+{
+  "model": "portfolio.skill",
+  "pk": 6,
+  "fields": {
+    "name": "Giuseppe",
+    "category": "backend",
+    "proficiency": 3,
+    "icon": "fas fa-code",
+    "order": 1
+  }
+},
+{
+  "model": "portfolio.experience",
+  "pk": 1,
+  "fields": {
+    "title": "Web Developer",
+    "company": "Tech Company",
+    "location": "Milano, Italia",
+    "description": "Sviluppo di applicazioni web con Django e React",
+    "start_date": "2023-01-01",
+    "end_date": null,
+    "is_current": true,
+    "order": 1
+  }
+},
+{
+  "model": "portfolio.sitesettings",
+  "pk": 1,
+  "fields": {
+    "site_title": "Il Mio Portfolio",
+    "site_description": "Portfolio professionale di uno sviluppatore web",
+    "author_name": "Giuseppe alamamaasasaq",
+    "author_bio": "",
+    "author_image": "profile/Screenshot_2025-10-14_091801.png",
+    "email": "jexenij636@rykone.com",
+    "phone": "3333321334124",
+    "location": "cata",
+    "social_links": {},
+    "current_palette": null
+  }
+}
+]

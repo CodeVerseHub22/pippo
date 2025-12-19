@@ -117,17 +117,17 @@
                         <a href="{{ site_settings.github_url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        {% else %}
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         {% endif %}
                         {% if site_settings.linkedin_url %}
                         <a href="{{ site_settings.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        {% else %}
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         {% endif %}
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        {% if site_settings.twitter_url %}
+                        <a href="{{ site_settings.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        {% endif %}
                         <a href="mailto:{{ site_settings.email|default:'info@example.com' }}" aria-label="Email">
                             <i class="fas fa-envelope"></i>
                         </a>
@@ -143,12 +143,12 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="footer-title">Servizi</h5>
+                    <h5 class="footer-title">Tecnologie</h5>
                     <ul class="footer-links">
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Frontend Development</a></li>
-                        <li><a href="#">Backend Development</a></li>
-                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="{% url 'projects' %}">Web Development</a></li>
+                        <li><a href="{% url 'projects' %}">Frontend Development</a></li>
+                        <li><a href="{% url 'projects' %}">Backend Development</a></li>
+                        <li><a href="{% url 'about' %}">Skills</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
