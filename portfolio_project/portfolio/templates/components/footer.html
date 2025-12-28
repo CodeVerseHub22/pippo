@@ -1,0 +1,132 @@
+{% load static %}
+<!-- Footer -->
+<footer class="footer mt-auto py-4 py-md-5">
+  <div class="container py-3 py-md-4 px-3 px-md-4">
+    <div class="row g-4 g-md-5">
+      <!-- Brand Section -->
+      <div class="col-12 col-lg-4">
+        <a
+          href="{% url 'home' %}"
+          class="navbar-brand brand mb-3 mb-md-4 d-inline-flex align-items-center gap-2"
+        >
+          <i class="fa-solid fa-code" style="color: #00d9ff;"></i>
+          <span class="h4 fw-bold text-white m-0"
+            >{{ site_settings.author_name|default:"Portfolio" }}</span
+          >
+        </a>
+        <p class="text-white opacity-75 mb-3 mb-md-4 pe-lg-5">
+          {{ site_settings.site_description|default:"Sviluppatore Web & Mobile focalizzato sulla creazione di esperienze digitali d'impatto." }}
+        </p>
+
+        <div class="d-flex gap-2 gap-md-3 mt-3 mt-md-4">
+          <a
+            href="{{ site_settings.social_links.github|default:'#' }}"
+            class="footer-social-btn"
+            target="_blank"
+            title="GitHub"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="{{ site_settings.social_links.linkedin|default:'#' }}"
+            class="footer-social-btn"
+            target="_blank"
+            title="LinkedIn"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a
+            href="mailto:{{ site_settings.email }}"
+            class="footer-social-btn"
+            title="Email"
+          >
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-md-4 col-lg-2 ms-lg-auto">
+        <h5 class="text-white fw-bold mb-3 mb-md-4">Navigazione</h5>
+        <ul class="list-unstyled d-grid gap-2">
+          <li>
+            <a
+              href="{% url 'home' %}"
+              class="footer-link small"
+              ><i class="fa-solid fa-chevron-right me-2 opacity-50"></i> Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'projects' %}"
+              class="footer-link small"
+              ><i class="fa-solid fa-chevron-right me-2 opacity-50"></i>
+              Progetti</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'certifications' %}"
+              class="footer-link small"
+              ><i class="fa-solid fa-chevron-right me-2 opacity-50"></i>
+              Certificazioni</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'contact' %}"
+              class="footer-link small"
+              ><i class="fa-solid fa-chevron-right me-2 opacity-50"></i>
+              Contatti</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <h5 class="text-white fw-bold mb-3 mb-md-4">Contatti</h5>
+        <div class="vstack gap-3">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-white opacity-50 small">Email</span>
+              <i class="fa-solid fa-envelope" style="color: #00d9ff;"></i>
+            </div>
+            <a href="mailto:{{ site_settings.email }}" class="text-white text-decoration-none footer-link small d-block">
+              {{ site_settings.email }}
+            </a>
+          </div>
+          {% if site_settings.location %}
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-white opacity-50 small">Località</span>
+              <i class="fa-solid fa-location-dot" style="color: #00d9ff;"></i>
+            </div>
+            <span class="text-white fw-semibold small d-block">{{ site_settings.location }}</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="col-12 col-md-4 col-lg-3">
+        <h5 class="text-white fw-bold mb-3 mb-md-4">Lavoriamo insieme</h5>
+        <p class="text-white opacity-75 small mb-3">
+          Hai un progetto in mente? Mettiamoci in contatto!
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-primary w-100">
+          <i class="fas fa-paper-plane me-2"></i>Invia Messaggio
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="row mt-4 mt-md-5 pt-3 pt-md-4 border-top" style="border-color: rgba(0, 217, 255, 0.1) !important;">
+      <div class="col-12 text-center">
+        <p class="text-white opacity-50 small m-0">
+          &copy; {% now "Y" %} {{ site_settings.author_name|default:"Portfolio" }}. Tutti i diritti riservati.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

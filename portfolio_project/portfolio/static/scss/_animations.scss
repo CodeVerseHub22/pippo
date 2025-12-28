@@ -1,0 +1,16 @@
+/* ==========================================================================
+   ANIMATIONS - Scroll Effects & Transitions
+   ========================================================================== */
+
+@use 'variables' as *;
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s $ease-out;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

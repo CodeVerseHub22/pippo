@@ -1,0 +1,39 @@
+/* ==========================================================================
+   VARIABLES - Color Palette & Design Tokens
+   ========================================================================== */
+
+// Color Palette - Cyber Cyan (Definitiva)
+$bg-base: #000000;        // Nero puro
+$bg-surface: #0a0a0a;     // Nero leggermente più chiaro
+$bg-elevated: #1a1a1a;    // Nero elevato
+
+$primary: #00d9ff;        // Cyan brillante
+$primary-dark: #00b8d4;
+$primary-light: #4dffff;
+$primary-glow: rgba(0, 217, 255, 0.4);
+
+$secondary: #00d9ff;      // Cyan (uguale al primary per coerenza)
+$accent: #0891b2;         // Cyan scuro per accenti
+
+$text-main: #ffffff;      // Bianco puro
+$text-dim: #cccccc;       // Grigio chiaro
+$text-muted: #888888;     // Grigio medio
+
+$border: rgba(255, 255, 255, 0.08);
+$border-bright: rgba(255, 255, 255, 0.15);
+
+// Spacing & Sizing
+$nav-height: 80px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-xl: 30px;
+
+// Transitions
+$ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+$transition: 0.3s $ease-out;
+
+// Typography
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-headings: 'Space Grotesk', sans-serif;
+$font-mono: 'JetBrains Mono', 'Courier New', monospace;
