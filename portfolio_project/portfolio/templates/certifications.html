@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Certificazioni - {{ site_settings.author_name|default:'Portfolio' }}{% endblock %}
+
+{% block extra_css %}
+<style>
+.cert-img-clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.cert-img-clickable:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+#certModalOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  overflow: auto;
+}
+#certModalOverlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cert-modal-content {
+  position: relative;
+  max-width: 95%;
+  max-height: 95vh;
+  padding: 20px;
+}
+.cert-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: #00d9ff;
+  cursor: pointer;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.8);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00d9ff;
+  transition: all 0.3s ease;
+}
+.cert-modal-close:hover {
+  background: #00d9ff;
+  color: #000;
+  transform: rotate(90deg);
+}
+.cert-modal-img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+  border: 2px solid #00d9ff;
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="certifications-hero py-5">
+  <div class="container py-5 mt-5">
+    <div class="row mb-5" data-animate>
+      <div class="col-lg-8">
+        <span class="section-label">Competenze Validate</span>
+        <h1 class="display-3 fw-bold mb-4">
+          Le Mie <span class="text-gradient">Certificazioni</span>.
+        </h1>
+        <p class="lead opacity-75">
+          Un elenco dei traguardi formativi e delle certificazioni tecniche che
+          ho ottenuto nel corso del mio percorso professionale.
+        </p>
+      </div>
+    </div>
+
+    <!-- Certifications Grid -->
+    <div class="row g-4">
+      {% for cert in certifications %}
+      <div class="col-md-6 col-lg-4" data-animate>
+        <article class="card h-100 overflow-hidden border-0 shadow-lg">
+          <div class="project-img-container">
+            {% if cert.certificate_image %}
+            <img
+              src="{{ cert.certificate_image.url }}"
+              alt="{{ cert.title }}"
+              class="project-img cert-img-clickable"
+              onclick="openCertModal('{{ cert.certificate_image.url }}', '{{ cert.title }}')"
+            />
+            {% else %}
+            <div
+              class="project-img bg-dark d-flex align-items-center justify-content-center"
+            >
+              <i
+                class="fas fa-certificate fa-3x icon-primary opacity-50"
+              ></i>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="mb-3">
+              <span class="tag">{{ cert.issuing_organization }}</span>
+            </div>
+            <h3 class="h4 mb-2 text-white">{{ cert.title }}</h3>
+            <p class="small fw-semibold mb-3" style="color: #00d9ff;">
+              Rilasciata il: {{ cert.issue_date|date:"F Y" }}
+            </p>
+            {% if cert.description %}
+            <p class="small mb-4 flex-grow-1 text-white opacity-75">
+              {{ cert.description }}
+            </p>
+            {% endif %} {% if cert.verification_url %}
+            <div class="mt-auto pt-3">
+              <a
+                href="{{ cert.verification_url }}"
+                target="_blank"
+                class="btn btn-outline-cyber w-100 justify-content-center"
+              >
+                Verifica Credenziale <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <h3 class="text-muted">Nessuna certificazione inserita al momento.</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Modal overlay personalizzato -->
+<div id="certModalOverlay" onclick="closeCertModal()">
+  <span class="cert-modal-close" onclick="closeCertModal()">&times;</span>
+  <div class="cert-modal-content">
+    <img id="certModalImg" class="cert-modal-img" src="" alt="">
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openCertModal(imgUrl, title) {
+  var modal = document.getElementById('certModalOverlay');
+  var modalImg = document.getElementById('certModalImg');
+  modal.classList.add('active');
+  modalImg.src = imgUrl;
+  modalImg.alt = title;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+  var modal = document.getElementById('certModalOverlay');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Chiudi con ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeCertModal();
+  }
+});
+
+// Previeni chiusura quando clicchi sull'immagine
+document.addEventListener('DOMContentLoaded', function() {
+  var modalImg = document.getElementById('certModalImg');
+  if (modalImg) {
+    modalImg.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+});
+</script>
+{% endblock %}

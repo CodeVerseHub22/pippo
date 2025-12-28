@@ -1,0 +1,113 @@
+/* ==========================================================================
+   BASE - Reset, Body & Typography
+   ========================================================================== */
+
+@use 'variables' as *;
+
+// Google Fonts - Space Grotesk + Inter + JetBrains Mono
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --bg-base: #{$bg-base};
+    --bg-surface: #{$bg-surface};
+    --bg-elevated: #{$bg-elevated};
+    --primary: #{$primary};
+    --primary-dark: #{$primary-dark};
+    --primary-light: #{$primary-light};
+    --primary-glow: #{$primary-glow};
+    --secondary: #{$secondary};
+    --accent: #{$accent};
+    --text-main: #{$text-main};
+    --text-dim: #{$text-dim};
+    --text-muted: #{$text-muted};
+    --border: #{$border};
+    --border-bright: #{$border-bright};
+    --nav-height: #{$nav-height};
+    --radius-sm: #{$radius-sm};
+    --radius-md: #{$radius-md};
+    --radius-lg: #{$radius-lg};
+    --ease-out: #{$ease-out};
+    --transition: #{$transition};
+}
+
+body {
+    background-color: $bg-base;
+    color: $text-main;
+    font-family: $font-family;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: $primary;
+    color: $bg-base;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: $bg-base;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $bg-elevated;
+    border-radius: 10px;
+    border: 2px solid $bg-base;
+
+    &:hover {
+        background: $text-muted;
+    }
+}
+
+// Container
+.container {
+    max-width: 1280px;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-headings;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, $primary, $secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-label {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: $primary;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+// Monospace code
+code, pre, .code {
+    font-family: $font-mono;
+}

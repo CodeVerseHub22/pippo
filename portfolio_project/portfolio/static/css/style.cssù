@@ -1,0 +1,18 @@
+/* Error: @use rules must be written before any other rules.
+ *    ,
+ * 11 | @use 'variables' as *;
+ *    | ^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   portfolio_project\portfolio\static\scss\_components.scss 11:1  @use
+ *   portfolio_project\portfolio\static\scss\main.scss 9:1          root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: @use rules must be written before any other rules.\a    \2577 \a 11 \2502  @use 'variables' as *;\d\a    \2502  ^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   portfolio_project\\portfolio\\static\\scss\\_components.scss 11:1  @use\a   portfolio_project\\portfolio\\static\\scss\\main.scss 9:1          root stylesheet";
+}

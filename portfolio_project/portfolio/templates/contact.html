@@ -1,276 +1,190 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Contatti - {{ site_settings.site_title }}{% endblock %}
-
+{% block title %}Contatti - {{ site_settings.author_name|default:'Portfolio' }}{% endblock %}
 {% block content %}
-<!-- Contact Hero -->
-<section class="contact-hero">
-    <div class="hero-bg-effects">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <div class="hero-badge animate-fade-in">
-                    <i class="fas fa-satellite-dish"></i>
-                    <span>Get in Touch</span>
-                </div>
-                <h1 class="hero-title animate-fade-in">
-                    Iniziamo a <span class="text-gradient">Collaborare</span>
-                </h1>
-                <p class="hero-subtitle animate-fade-in">
-                    Hai un progetto in mente o vuoi semplicemente fare due chiacchiere? 
-                    Sono sempre aperto a nuove opportunità!
-                </p>
-            </div>
+<section class="contact-page py-5 mt-5">
+  <div class="container py-3 py-md-5">
+    <div class="row g-4 g-lg-5 align-items-start">
+      <div class="col-12 col-lg-6" data-animate>
+        <div class="pe-lg-5 mb-4 mb-lg-0">
+          <span class="section-label">Contatti</span>
+          <h1 class="display-4 fw-bold mb-3 mb-md-4 pt-lg-5">
+            Parliamo del tuo <span class="text-gradient">Prossimo</span> Grande
+            Progetto.
+          </h1>
+          <p class="lead opacity-75 mb-4 mb-md-5">
+            Hai un'idea che vuoi trasformare in realtà? Che tu stia cercando 
+            di creare un nuovo sito web, sviluppare un'applicazione o semplicemente 
+            migliorare la tua presenza digitale, sono qui per aiutarti. 
+            Usa il form qui accanto o contattami direttamente sui social. 
+            Rispondo sempre entro 24 ore e sarò felice di discutere del tuo progetto 
+            senza alcun impegno.
+          </p>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- Contact Section -->
-<section class="contact-section">
-    <div class="container">
-        <div class="row g-5">
-            <!-- Contact Form -->
-            <div class="col-lg-7">
-                <div class="contact-form-card animate-on-scroll">
-                    <div class="form-header">
-                        <div class="form-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </div>
-                        <h2>Inviami un Messaggio</h2>
-                        <p>Compila il form e ti risponderò il prima possibile</p>
-                    </div>
-                    
-                    <form method="post" action="{% url 'contact' %}" id="contactForm" class="modern-form">
-                        {% csrf_token %}
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <div class="input-wrapper">
-                                    <i class="fas fa-user input-icon"></i>
-                                    <input type="text" name="name" id="id_name" 
-                                           class="form-input {% if form.name.errors %}error{% endif %}" 
-                                           placeholder=" "
-                                           value="{{ form.name.value|default:'' }}"
-                                           required>
-                                    <label for="id_name" class="input-label">Nome *</label>
-                                    <div class="input-highlight"></div>
-                                </div>
-                                {% if form.name.errors %}
-                                <span class="error-message">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    {{ form.name.errors.0 }}
-                                </span>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="input-wrapper">
-                                    <i class="fas fa-envelope input-icon"></i>
-                                    <input type="email" name="email" id="id_email" 
-                                           class="form-input {% if form.email.errors %}error{% endif %}" 
-                                           placeholder=" "
-                                           value="{{ form.email.value|default:'' }}"
-                                           required>
-                                    <label for="id_email" class="input-label">Email *</label>
-                                    <div class="input-highlight"></div>
-                                </div>
-                                {% if form.email.errors %}
-                                <span class="error-message">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    {{ form.email.errors.0 }}
-                                </span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <div class="input-wrapper">
-                                <i class="fas fa-tag input-icon"></i>
-                                <input type="text" name="subject" id="id_subject" 
-                                       class="form-input {% if form.subject.errors %}error{% endif %}" 
-                                       placeholder=" "
-                                       value="{{ form.subject.value|default:'' }}"
-                                       required>
-                                <label for="id_subject" class="input-label">Oggetto *</label>
-                                <div class="input-highlight"></div>
-                            </div>
-                            {% if form.subject.errors %}
-                            <span class="error-message">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ form.subject.errors.0 }}
-                            </span>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <div class="input-wrapper textarea-wrapper">
-                                <i class="fas fa-comment-alt input-icon"></i>
-                                <textarea name="message" id="id_message" 
-                                          class="form-input form-textarea {% if form.message.errors %}error{% endif %}" 
-                                          placeholder=" "
-                                          rows="5"
-                                          required>{{ form.message.value|default:'' }}</textarea>
-                                <label for="id_message" class="input-label">Messaggio *</label>
-                                <div class="input-highlight"></div>
-                            </div>
-                            {% if form.message.errors %}
-                            <span class="error-message">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ form.message.errors.0 }}
-                            </span>
-                            {% endif %}
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <span class="btn-text">Invia Messaggio</span>
-                            <span class="btn-icon">
-                                <i class="fas fa-paper-plane"></i>
-                            </span>
-                            <div class="btn-glow-effect"></div>
-                        </button>
-                    </form>
-                </div>
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 p-3 p-sm-4 p-xl-5 shadow-lg contact-card-gradient">
+          <form method="post" id="contact-form" class="row g-3 g-md-4">
+            {% csrf_token %}
+            <div class="col-12">
+              <label
+                class="form-label small text-white text-uppercase fw-bold mb-2"
+                >Nome</label
+              >
+              <input
+                type="text"
+                name="name"
+                required
+                class="form-control bg-dark border-secondary text-white py-3 px-4 rounded-3"
+                placeholder="Il tuo nome"
+              />
             </div>
-            
-            <!-- Contact Info -->
-            <div class="col-lg-5">
-                <div class="contact-info-panel animate-on-scroll">
-                    <div class="info-header">
-                        <h3>Informazioni di Contatto</h3>
-                        <p>Preferisci contattarmi direttamente? Ecco come puoi trovarmi:</p>
-                    </div>
-                    
-                    <div class="contact-cards">
-                        {% if site_settings.email %}
-                        <a href="mailto:{{ site_settings.email }}" class="contact-info-card">
-                            <div class="card-icon email-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-label">Email</span>
-                                <span class="card-value">{{ site_settings.email }}</span>
-                            </div>
-                            <i class="fas fa-arrow-right card-arrow"></i>
-                        </a>
-                        {% endif %}
-                        
-                        {% if site_settings.phone %}
-                        <a href="tel:{{ site_settings.phone }}" class="contact-info-card">
-                            <div class="card-icon phone-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-label">Telefono</span>
-                                <span class="card-value">{{ site_settings.phone }}</span>
-                            </div>
-                            <i class="fas fa-arrow-right card-arrow"></i>
-                        </a>
-                        {% endif %}
-                        
-                        {% if site_settings.location %}
-                        <div class="contact-info-card">
-                            <div class="card-icon location-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-label">Località</span>
-                                <span class="card-value">{{ site_settings.location }}</span>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Social Links -->
-                    <div class="social-section">
-                        <h4>Seguimi sui Social</h4>
-                        <div class="social-grid">
-                            {% if site_settings.social_links.github %}
-                            <a href="{{ site_settings.social_links.github }}" target="_blank" class="social-card github">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            {% endif %}
-                            {% if site_settings.social_links.linkedin %}
-                            <a href="{{ site_settings.social_links.linkedin }}" target="_blank" class="social-card linkedin">
-                                <i class="fab fa-linkedin-in"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            {% endif %}
-                            {% if site_settings.social_links.twitter %}
-                            <a href="{{ site_settings.social_links.twitter }}" target="_blank" class="social-card twitter">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                            {% endif %}
-                            {% if site_settings.social_links.instagram %}
-                            <a href="{{ site_settings.social_links.instagram }}" target="_blank" class="social-card instagram">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <!-- Availability Status -->
-                    <div class="availability-card">
-                        <div class="availability-indicator">
-                            <span class="pulse-dot green"></span>
-                            <span>Attualmente Disponibile</span>
-                        </div>
-                        <p>Sono disponibile per nuovi progetti freelance e collaborazioni. Tempo di risposta medio: 24h</p>
-                    </div>
-                </div>
+            <div class="col-12">
+              <label
+                class="form-label small text-white text-uppercase fw-bold mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                name="email"
+                required
+                class="form-control bg-dark border-secondary text-white py-2 py-md-3 px-3 px-md-4 rounded-3"
+                placeholder="la-tua@email.com"
+              />
             </div>
+            <div class="col-12">
+              <label
+                class="form-label small text-white text-uppercase fw-bold mb-2"
+                >Oggetto</label
+              >
+              <input
+                type="text"
+                name="subject"
+                required
+                class="form-control bg-dark border-secondary text-white py-2 py-md-3 px-3 px-md-4 rounded-3"
+                placeholder="Di cosa vogliamo parlare?"
+              />
+            </div>
+            <div class="col-12">
+              <label
+                class="form-label small text-white text-uppercase fw-bold mb-2"
+                >Messaggio</label
+              >
+              <textarea
+                name="message"
+                required
+                rows="4"
+                class="form-control bg-dark border-secondary text-white py-2 py-md-3 px-3 px-md-4 rounded-3"
+                placeholder="Il tuo messaggio..."
+              ></textarea>
+            </div>
+            <div class="col-12 pt-2 pt-md-3">
+              <button
+                type="submit"
+                class="btn btn-primary w-100 py-2 py-md-3 shadow-lg fw-bold text-uppercase"
+              >
+                Invia Messaggio <i class="fas fa-paper-plane ms-2"></i>
+              </button>
+            </div>
+          </form>
         </div>
-    </div>
+  </div>
 </section>
 
 <!-- FAQ Section -->
-<section class="faq-section">
-    <div class="container">
-        <div class="section-header text-center">
-            <div class="section-badge">
-                <i class="fas fa-question-circle"></i>
-                <span>FAQ</span>
-            </div>
-            <h2 class="section-title">Domande <span class="text-gradient">Frequenti</span></h2>
-        </div>
-        
-        <div class="faq-grid">
-            <div class="faq-card animate-on-scroll">
-                <div class="faq-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h4>Quanto tempo richiede un progetto?</h4>
-                <p>Dipende dalla complessità. Un sito web semplice può richiedere 1-2 settimane, mentre progetti più complessi possono richiedere 1-3 mesi.</p>
-            </div>
-            <div class="faq-card animate-on-scroll">
-                <div class="faq-icon">
-                    <i class="fas fa-money-bill-wave"></i>
-                </div>
-                <h4>Come funziona il preventivo?</h4>
-                <p>Dopo una prima chiamata conoscitiva, preparo un preventivo dettagliato basato sulle tue esigenze specifiche. Nessun costo nascosto.</p>
-            </div>
-            <div class="faq-card animate-on-scroll">
-                <div class="faq-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h4>Offri supporto post-lancio?</h4>
-                <p>Assolutamente! Offro pacchetti di manutenzione e supporto continuo per garantire che il tuo progetto funzioni sempre al meglio.</p>
-            </div>
-            <div class="faq-card animate-on-scroll">
-                <div class="faq-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <h4>Lavori anche da remoto?</h4>
-                <p>Sì, la maggior parte dei miei progetti sono gestiti da remoto. Utilizzo strumenti moderni per comunicazione e collaborazione efficaci.</p>
-            </div>
-        </div>
+<section class="faq-section py-4 py-md-5 bg-dark bg-opacity-25">
+  <div class="container py-3 py-md-5">
+    <div class="text-center mb-4 mb-md-5" data-animate>
+      <span class="section-label">FAQ</span>
+      <h2 class="display-5 fw-bold mb-3">
+        Domande <span class="text-gradient">Frequenti</span>
+      </h2>
     </div>
+    
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <div class="accordion accordion-flush" id="faqAccordion" data-animate>
+          <div class="accordion-item bg-transparent border-0 mb-3">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed bg-dark text-white border border-secondary rounded-3 shadow-sm py-3 px-3 px-md-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                <i class="fas fa-clock text-primary me-2 me-md-3"></i>
+                <span class="flex-grow-1">Quanto tempo richiede un progetto?</span>
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body bg-dark bg-opacity-50 text-white rounded-3 mt-2 border border-secondary p-3 p-md-4">
+                Dipende dalla complessità. Un sito web semplice può richiedere 1-2 settimane, mentre progetti più complessi possono richiedere 1-3 mesi.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-0 mb-3">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed bg-dark text-white border border-secondary rounded-3 shadow-sm py-3 px-3 px-md-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                <i class="fas fa-euro-sign text-primary me-2 me-md-3"></i>
+                <span class="flex-grow-1">Come funziona il preventivo?</span>
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body bg-dark bg-opacity-50 text-white rounded-3 mt-2 border border-secondary p-3 p-md-4">
+                Dopo una prima chiamata conoscitiva, preparo un preventivo dettagliato basato sulle tue esigenze specifiche. Nessun costo nascosto.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-0 mb-3">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed bg-dark text-white border border-secondary rounded-3 shadow-sm py-3 px-3 px-md-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                <i class="fas fa-headset text-primary me-2 me-md-3"></i>
+                <span class="flex-grow-1">Offri supporto post-lancio?</span>
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body bg-dark bg-opacity-50 text-white rounded-3 mt-2 border border-secondary p-3 p-md-4">
+                Assolutamente! Offro pacchetti di manutenzione e supporto continuo per garantire che il tuo progetto funzioni sempre al meglio.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-0 mb-3">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed bg-dark text-white border border-secondary rounded-3 shadow-sm py-3 px-3 px-md-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                <i class="fas fa-laptop-house text-primary me-2 me-md-3"></i>
+                <span class="flex-grow-1">Lavori anche da remoto?</span>
+              </button>
+            </h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body bg-dark bg-opacity-50 text-white rounded-3 mt-2 border border-secondary p-3 p-md-4">
+                Sì, la maggior parte dei miei progetti sono gestiti da remoto. Utilizzo strumenti moderni per comunicazione e collaborazione efficaci.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .form-control:focus {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 15px var(--primary-glow) !important;
+    color: white !important;
+  }
+  .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Responsive accordion buttons */
+  @media (max-width: 576px) {
+    .accordion-button {
+      font-size: 0.9rem;
+    }
+    .accordion-button i {
+      font-size: 0.85rem;
+    }
+  }
+</style>
 {% endblock %}

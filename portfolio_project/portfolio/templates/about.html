@@ -1,311 +1,151 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Chi Sono - {{ site_settings.site_title }}{% endblock %}
-
+{% block title %}Chi Sono - {{ site_settings.author_name|default:'Portfolio' }}{% endblock %}
 {% block content %}
-<!-- About Hero -->
-<section class="about-hero">
-    <div class="hero-bg-effects">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-    </div>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 text-center mb-5 mb-lg-0">
-                <div class="profile-container animate-fade-in">
-                    <div class="profile-ring">
-                        <div class="ring-glow"></div>
-                    </div>
-                    {% if site_settings.author_image %}
-                    <img src="{{ site_settings.author_image.url }}" alt="{{ site_settings.author_name }}" class="profile-image">
-                    {% else %}
-                    <div class="profile-placeholder">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    {% endif %}
-                    <div class="profile-status">
-                        <span class="status-dot"></span>
-                        <span>Disponibile per progetti</span>
-                    </div>
-                </div>
+<section class="about-page py-5">
+  <div class="container py-5">
+    <!-- Profile Intro -->
+    <div class="row align-items-center gy-5 mb-5 pb-5">
+      <div class="col-lg-5 order-lg-1">
+        <div class="hero-img-container" data-animate>
+          <div class="hero-blob mx-auto hero-blob-container">
+            {% if site_settings.author_image %}
+            <img
+              src="{{ site_settings.author_image.url }}"
+              alt="{{ site_settings.author_name }}"
+            />
+            {% else %}
+            <div class="d-flex align-items-center justify-content-center h-100">
+              <i class="fas fa-user-tie fa-5x"></i>
             </div>
-            <div class="col-lg-7">
-                <div class="about-intro animate-fade-in">
-                    <div class="hero-badge">
-                        <i class="fas fa-user-astronaut"></i>
-                        <span>About Me</span>
-                    </div>
-                    <h1 class="about-title">
-                        Ciao, sono <span class="text-gradient">{{ site_settings.author_name|default:"Developer" }}</span>
-                    </h1>
-                    <p class="about-subtitle">{{ site_settings.author_bio|default:"Sviluppatore appassionato di tecnologie web e mobile, con esperienza nella creazione di soluzioni digitali innovative e user-friendly." }}</p>
-                    
-                    <!-- Info Pills -->
-                    <div class="info-pills">
-                        {% if site_settings.location %}
-                        <div class="info-pill">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ site_settings.location }}</span>
-                        </div>
-                        {% endif %}
-                        {% if site_settings.email %}
-                        <div class="info-pill">
-                            <i class="fas fa-envelope"></i>
-                            <span>{{ site_settings.email }}</span>
-                        </div>
-                        {% endif %}
-                        <div class="info-pill highlight">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Freelancer</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="about-actions">
-                        {% if site_settings.social_links.github %}
-                        <a href="{{ site_settings.social_links.github }}" target="_blank" class="social-btn github">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        {% endif %}
-                        {% if site_settings.social_links.linkedin %}
-                        <a href="{{ site_settings.social_links.linkedin }}" target="_blank" class="social-btn linkedin">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                        {% endif %}
-                        <a href="{% url 'contact' %}" class="btn-glow">
-                            <span>Contattami</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endif %}
+          </div>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- Stats Section -->
-<section class="about-stats">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-card animate-on-scroll">
-                <div class="stat-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <div class="stat-value" data-count="50">0</div>
-                <div class="stat-label">Progetti Completati</div>
-            </div>
-            <div class="stat-card animate-on-scroll">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-value" data-count="30">0</div>
-                <div class="stat-label">Clienti Soddisfatti</div>
-            </div>
-            <div class="stat-card animate-on-scroll">
-                <div class="stat-icon">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <div class="stat-value" data-count="999">0</div>
-                <div class="stat-label">Caffè Bevuti</div>
-            </div>
-            <div class="stat-card animate-on-scroll">
-                <div class="stat-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="stat-value" data-count="5">0</div>
-                <div class="stat-label">Anni di Esperienza</div>
-            </div>
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="section-label" data-animate>Chi Sono</span>
+        <h1 class="mb-4" data-animate>
+          Passione per il <span class="text-gradient">Codice</span> e il Design.
+        </h1>
+        <p class="mb-5 opacity-75 fs-5" data-animate>
+          {{ site_settings.author_bio|default:'Sono uno sviluppatore appassionato con una missione: creare soluzioni digitali che non siano solo funzionali, ma che lascino il segno.' }}
+        </p>
+        <div
+          class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start"
+          data-animate
+        >
+          {% if site_settings.cv_file %}
+          <a
+            href="{{ site_settings.cv_file.url }}"
+            class="btn btn-primary"
+            target="_blank"
+            >Visualizza CV</a
+          >
+          {% endif %}
+          <a href="{% url 'contact' %}" class="btn btn-outline-cyber"
+            >Parliamo del tuo progetto</a
+          >
         </div>
+      </div>
     </div>
-</section>
 
-<!-- Skills Section -->
-<section class="skills-section">
-    <div class="container">
-        <div class="section-header text-center">
-            <div class="section-badge">
-                <i class="fas fa-cogs"></i>
-                <span>Tech Stack</span>
-            </div>
-            <h2 class="section-title">Le Mie <span class="text-gradient">Competenze</span></h2>
-            <p class="section-subtitle">Tecnologie e strumenti che utilizzo quotidianamente</p>
+    <!-- Education Grid -->
+    <div class="mb-5 pb-5">
+      <div class="text-center mb-5" data-animate>
+        <span class="section-label">Formazione</span>
+        <h2>Studi e Certificazioni</h2>
+      </div>
+
+      <div class="row g-4">
+        {% for edu in education %}
+        <div class="col-md-6 col-lg-4" data-animate>
+          <div class="card p-4">
+            <h3 class="h4 mb-2">{{ edu.title }}</h3>
+            <h4 class="h6 mb-3 text-primary">
+              {{ edu.institution }}{% if edu.hours %} | {{ edu.hours }} ore{% endif %}
+            </h4>
+            {% if edu.description %}
+            <p class="small m-0 text-muted">{{ edu.description }}</p>
+            {% endif %}
+          </div>
         </div>
-        
-        <div class="skills-showcase">
-            {% for category, skill_list in skills_by_category.items %}
-            <div class="skill-category-card animate-on-scroll">
-                <div class="category-header">
-                    <div class="category-icon">
-                        {% if category == "Backend" %}
-                        <i class="fas fa-server"></i>
-                        {% elif category == "Frontend" %}
-                        <i class="fas fa-palette"></i>
-                        {% elif category == "Mobile" %}
-                        <i class="fas fa-mobile-alt"></i>
-                        {% elif category == "DevOps" %}
-                        <i class="fas fa-cloud"></i>
-                        {% elif category == "Tools" %}
-                        <i class="fas fa-tools"></i>
-                        {% elif category == "Database" %}
-                        <i class="fas fa-database"></i>
-                        {% else %}
-                        <i class="fas fa-code"></i>
-                        {% endif %}
-                    </div>
-                    <h3 class="category-title">{{ category }}</h3>
-                </div>
-                <div class="skills-list">
-                    {% for skill in skill_list %}
-                    <div class="skill-item-modern">
-                        <div class="skill-header">
-                            <div class="skill-icon">
-                                <i class="{{ skill.icon }}"></i>
-                            </div>
-                            <span class="skill-name">{{ skill.name }}</span>
-                            <div class="skill-level">
-                                {% for i in "12345" %}
-                                    {% if forloop.counter <= skill.proficiency %}
-                                    <span class="level-dot active"></span>
-                                    {% else %}
-                                    <span class="level-dot"></span>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="skill-bar" role="progressbar" aria-label="{{ skill.name }} proficiency level" aria-valuenow="{{ skill.proficiency|floatformat:0 }}0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="skill-progress" data-width="{{ skill.proficiency|floatformat:0 }}0"></div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% empty %}
-            <div class="empty-skills text-center">
-                <i class="fas fa-tools fa-3x mb-3 icon-faded" aria-hidden="true"></i>
-                <p>Aggiungi le tue competenze dall'area admin.</p>
-            </div>
-            {% endfor %}
+        {% empty %}
+        <div class="col-12 text-center text-muted">
+          <p>Inserisci il tuo percorso di studi nell'admin.</p>
         </div>
+        {% endfor %}
+      </div>
     </div>
-</section>
 
-<!-- Experience Timeline -->
-<section class="experience-section">
-    <div class="container">
-        <div class="section-header text-center">
-            <div class="section-badge">
-                <i class="fas fa-briefcase"></i>
-                <span>Carriera</span>
+    <!-- Skills Grid -->
+    <div class="mb-5 pb-5">
+      <div class="text-center mb-5" data-animate>
+        <span class="section-label">Competenze</span>
+        <h2>Il Mio Stack Tecnologico</h2>
+      </div>
+
+      <div class="row g-4">
+        {% for category, skill_list in skills_by_category.items %}
+        <div class="col-lg-6" data-animate>
+          <div class="card p-4">
+            <h3 class="h4 text-primary mb-4">{{ category }}</h3>
+            <div class="row g-4">
+              {% for skill in skill_list %}
+              <div class="col-12">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="small fw-semibold">{{ skill.name }}</span>
+                  <span class="small opacity-50">{{ skill.level }}%</span>
+                </div>
+                <div class="progress progress-custom">
+                  <div
+                    class="progress-bar progress-bar-custom"
+                    role="progressbar"
+                    data-width="{{ skill.level }}"
+                    aria-valuenow="{{ skill.level }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+              {% endfor %}
             </div>
-            <h2 class="section-title">Il Mio <span class="text-gradient">Percorso</span></h2>
-            <p class="section-subtitle">Esperienza professionale e formazione</p>
+          </div>
         </div>
-        
-        <div class="timeline-modern">
-            <div class="timeline-line"></div>
-            
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="py-5 mt-5">
+      <div class="text-center mb-5" data-animate>
+        <span class="section-label">Esperienze</span>
+        <h2>Percorso Professionale</h2>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div
+            class="vstack gap-5 border-start border-secondary ps-4 ms-2 position-relative"
+          >
             {% for experience in experiences %}
-            <div class="timeline-item-modern {% if forloop.counter|divisibleby:2 %}right{% else %}left{% endif %} animate-on-scroll">
-                <div class="timeline-marker">
-                    <div class="marker-inner">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                </div>
-                <div class="timeline-card">
-                    <div class="timeline-period">
-                        <i class="far fa-calendar-alt"></i>
-                        {{ experience.start_date|date:"M Y" }} - 
-                        {% if experience.is_current %}
-                        <span class="current-badge">Presente</span>
-                        {% else %}
-                        {{ experience.end_date|date:"M Y" }}
-                        {% endif %}
-                    </div>
-                    <h3 class="timeline-title">{{ experience.title }}</h3>
-                    <div class="timeline-company">
-                        <i class="fas fa-building"></i>
-                        <span>{{ experience.company }}</span>
-                        {% if experience.location %}
-                        <span class="timeline-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{ experience.location }}
-                        </span>
-                        {% endif %}
-                    </div>
-                    <p class="timeline-description">{{ experience.description }}</p>
-                    {% if experience.is_current %}
-                    <div class="current-indicator">
-                        <span class="pulse-dot"></span>
-                        <span>Posizione Attuale</span>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-            {% empty %}
-            <div class="timeline-empty text-center">
-                <i class="fas fa-road fa-3x mb-3 icon-faded" aria-hidden="true"></i>
-                <p>Le esperienze lavorative verranno visualizzate qui.</p>
+            <div class="position-relative" data-animate>
+              <div class="timeline-dot"></div>
+              <span class="small fw-bold text-secondary mb-2 d-block">
+                {{ experience.start_date|date:"Y" }} - 
+                {% if experience.is_current %}Presente{% else %}{{ experience.end_date|date:"Y" }}{% endif %}
+              </span>
+              <h3 class="h4 mb-2">{{ experience.title }}</h3>
+              <h4 class="h6 text-muted mb-3">
+                {{ experience.company }} | {{ experience.location }}
+              </h4>
+              <p class="m-0 opacity-75">{{ experience.description }}</p>
             </div>
             {% endfor %}
+          </div>
         </div>
+      </div>
     </div>
-</section>
-
-<!-- Education Section -->
-{% if education %}
-<section class="education-section">
-    <div class="container">
-        <div class="section-header text-center">
-            <div class="section-badge">
-                <i class="fas fa-graduation-cap"></i>
-                <span>Formazione</span>
-            </div>
-            <h2 class="section-title">La Mia <span class="text-gradient">Formazione</span></h2>
-        </div>
-        
-        <div class="education-grid">
-            {% for edu in education %}
-            <div class="education-card animate-on-scroll">
-                <div class="edu-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="edu-content">
-                    <span class="edu-year">{{ edu.year }}</span>
-                    <h4 class="edu-degree">{{ edu.degree }}</h4>
-                    <p class="edu-institution">{{ edu.institution }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- CTA Section -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-card">
-            <div class="cta-content">
-                <div class="cta-icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h2>Lavoriamo Insieme</h2>
-                <p>Sono sempre aperto a nuove opportunità e collaborazioni interessanti. Non esitare a contattarmi!</p>
-                <a href="{% url 'contact' %}" class="btn-glow">
-                    <span>Inizia una Conversazione</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="cta-decoration">
-                <div class="orbit-ring"></div>
-                <div class="orbit-ring"></div>
-                <div class="orbit-ring"></div>
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
 {% endblock %}

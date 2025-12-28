@@ -1,4 +1,4 @@
-from .models import SiteSettings, ColorPalette
+from .models import SiteSettings
 
 
 def site_settings(request):
@@ -8,15 +8,6 @@ def site_settings(request):
     """
     settings = SiteSettings.get_settings()
     
-    # Ottieni la palette attiva
-    palette = None
-    if settings.current_palette:
-        palette = settings.current_palette
-    else:
-        # Cerca una palette attiva
-        palette = ColorPalette.objects.filter(is_active=True).first()
-    
     return {
         'site_settings': settings,
-        'active_palette': palette,
     }

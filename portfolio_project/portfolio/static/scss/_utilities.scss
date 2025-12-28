@@ -1,0 +1,136 @@
+/* ==========================================================================
+   UTILITIES - Helper Classes
+   ========================================================================== */
+
+@use 'variables' as *;
+
+// Layout
+.hero-blob-container {
+    max-width: 350px;
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.contact-page {
+    padding-top: 10rem;
+}
+
+// Backgrounds
+.bg-surface {
+    background: $bg-surface;
+}
+
+.bg-icon-base {
+    color: $bg-base;
+}
+
+// Hero Sections
+.project-detail-hero,
+.projects-hero,
+.certifications-hero {
+    padding-top: calc($nav-height + 2rem);
+    background: linear-gradient(to bottom, $bg-base, $bg-surface);
+}
+
+.related-projects-section {
+    background: $bg-surface;
+}
+
+// Images
+.project-detail-img {
+    min-height: 400px;
+    object-fit: cover;
+}
+
+.project-img-small {
+    height: 200px;
+}
+
+.project-detail-img-placeholder {
+    min-height: 400px;
+}
+
+// Progress Bar
+.progress-custom {
+    height: 6px;
+    background: $bg-elevated;
+}
+
+.progress-bar-custom {
+    background: $primary;
+    box-shadow: 0 0 10px $primary-glow;
+    transition: width 1s ease-out;
+}
+
+// Icons
+.icon-primary {
+    color: $primary;
+}
+
+.icon-secondary {
+    color: $secondary;
+}
+
+.icon-accent {
+    color: $accent;
+}
+
+.icon-box {
+    width: 64px;
+    height: 64px;
+    border: 1px solid $border-bright;
+}
+
+// Stats
+.stat-number-primary {
+    color: $primary;
+}
+
+.stat-number-secondary {
+    color: $secondary;
+}
+
+.stat-number-accent {
+    color: $accent;
+}
+
+// Timeline
+.timeline-dot {
+    position: absolute;
+    translate: -50% 0;
+    background: $secondary;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    left: -26px;
+    top: 8px;
+    box-shadow: 0 0 10px $secondary;
+}
+
+// Text
+.tech-badge-small {
+    font-size: 0.75rem;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+.footer-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+// Cards
+.contact-card-gradient {
+    background: linear-gradient(135deg, $bg-surface, $bg-elevated);
+}
+
+// Opacity
+.opacity-50 {
+    opacity: 0.5;
+}

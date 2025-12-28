@@ -1,0 +1,12 @@
+/* ==========================================================================
+   MAIN SCSS - Portfolio Project
+   Modern Dark Mode | Professional Design System
+   ========================================================================== */
+
+// Import order: Variables → Base → Components → Utilities → Animations → Pages
+@use 'variables' as *;
+@use 'base';
+@use 'components';
+@use 'utilities';
+@use 'animations';
+@use 'homepage';
